@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>农产品管理系统-新闻</title>
+    {% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="/static/static1/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="/static/static1/css/main.css">
+</head>
+<body>
+<div class="header_con">
+		<div class="header">
+			<div class="welcome fl">欢迎浏览新闻</div>
+			<div class="fr">
+                {% if username %}
+                 <div class="login_info fl">
+					欢迎您：<em>{{ username }}</em>
+				 </div>
+                {% else %}
+				<div class="login_btn fl">
+					<a href="{% url 'login' %}">登录</a>
+					<span>|</span>
+					<a href="{% url 'register' %}">注册</a>
+				</div>
+                {% endif %}
+				<div class="user_link fl">
+					<span>|</span>
+					<a href="{% url 'user_center_info' %}">用户中心</a>
+					<span>|</span>
+					<a href="{% url 'cart' %}">我的购物车</a>
+					<span>|</span>
+					<a href="{% url 'user_center_order' %}">我的订单</a>
+				</div>
+			</div>
+		</div>
+</div>
+
+<div>
+    {% for g in page %}
+                    <li>
+                        <a href="/{{ g.id }}/"><img src="/upload/{{ g.ap_pic }}"></a>
+                        <h4><a href="/{{ g.id }}/">{{ g.ap_name }}</a></h4>
+                        <div class="operate">
+                            <span class="prize">{{ g.ap_price }}</span>
+                            <span class="unit">{{ g.ap_price }}/{{ g.gunit }}</span>
+                            <a href="/cart/add{{g.id}}_1/" class="add_goods" title="加入购物车"></a>
+                        </div>
+                    </li>
+                {% endfor %}
+</div>
+</body>
+</html>

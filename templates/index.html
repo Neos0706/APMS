@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head -->
+<head>
+
+<title>农产品管理系统</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<meta name="keywords" content="" />
+
+<!-- default css files -->
+    {% load staticfiles %}
+	<link rel="stylesheet" href="static/css/bootstrap.css" type="text/css" media="all">
+	<link href="static/css/JiSlider.css" rel="stylesheet"> <!-- banner slider css file -->
+	<link href="static/css/simpleLightbox.css" rel="stylesheet" type="text/css" /><!-- gallery css file -->
+	<link rel="stylesheet" href="static/css/font-awesome.min.css" /><!-- Font awesome css file -->
+	<link rel="stylesheet" href="static/css/style.css" type="text/css" media="all">
+<!-- default css files -->
+
+<!--web font-->
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese" rel="stylesheet">
+<link href="http://fonts.googleapis.com/css?family=Cabin:400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext,vietnamese" rel="stylesheet">
+<!--//web font-->
+{% comment %}<div id="a"><style>#a li{float: left;list-style: none;width: 200px}</style>
+    <ul  align="right">
+        {% if username %}
+        <li>用户名: {{ username }}</li>
+        <li><a href="{% url 'logout' %}">退出登录</a></li>
+        <li><a href="#">个人中心</a> </li>
+        {% else %}
+        <li><a href="{% url 'login' %}">登录</a> </li>
+        <li><a href="{% url 'register' %}">注册</a> </li>
+        {% endif %}
+    </ul>
+</div>{% endcomment %}
+
+</head>
+
+<!-- Body -->
+<body>
+
+<!-- header -->
+	<div class="header-bottom">
+		<div class="container-fluid">
+			<nav class="navbar navbar-default">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+				  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				  </button>
+					<div class="logo">
+						<h1><a class="navbar-brand" href="index.html"><span>农产品</span>之家 <p>农产品管理系统</p></a></h1>
+					</div>
+				</div>
+
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
+					<nav>
+						<ul class="nav navbar-nav">
+							<li class="active"><a class="scroll" href="index.html">首页</a></li>
+                            <li><a href="{% url 'ap' %}" class="scroll hvr-bounce-to-bottom">农产品</a></li>
+                            <li><a href="{% url 'news' %}" class="scroll hvr-bounce-to-bottom">新闻</a></li>
+							<li><a href="#about" class="scroll hvr-bounce-to-bottom">关于</a></li>
+							<li><a href="#services" class="scroll hvr-bounce-to-bottom">服务</a></li>
+							<li><a href="#team" class="scroll hvr-bounce-to-bottom">团队</a></li>
+							<li><a href="#gallery" class="scroll hvr-bounce-to-bottom">展示</a></li>
+							<li><a href="#contact" class="scroll hvr-bounce-to-bottom">联系我们</a></li>
+                            {% if username %}
+                                <li ><a href="#" class="scroll hvr-bounce-to-bottom">用户名: {{ username }}</a></li>
+                                <li><a href="{% url 'logout' %}">退出登录</a></li>
+                                <li><a href="{% url 'user_center_info' %}" class="scroll hvr-bounce-to-bottom">个人中心</a> </li>
+                            {% else %}
+                                <li ><a href="{% url 'login' %}" class="scroll hvr-bounce-to-bottom"  target="_blank">登录/注册</a></li>
+                            {% endif %}
+						</ul>
+					</nav>
+				</div>
+				<!-- /.navbar-collapse -->
+			</nav>
+			<div class="head-search">
+				<form action="#" method="post">
+					<div class="formborder">
+						<input type="text" placeholder="Search..." name="Search..." required="">
+						<input type="submit" value="">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+<!-- //header -->
+
+<!-- banner slider-->
+	<div class="banner-silder">
+		<div id="JiSlider" class="jislider">
+			<ul>
+				<li>
+					<div class="w3layouts-banner-top">
+						<div class="container">
+							<div class="col-md-6 bannerimg">
+							</div>
+							<div class="col-md-6 agileits-banner-info">
+								<h3>自然而又新鲜的农产品供应</h3>
+								<h3>质量</h3>
+								 <p>农产品之家</p>
+								<div class="more">
+									<a href="#" class="hvr-shutter-in-vertical" data-toggle="modal" data-target="#myModal">Read More <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+								</div>
+							</div>	
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="w3layouts-banner-top w3layouts-banner-top1">
+						<div class="container">
+							<div class="col-md-6 bannerimg1">
+							</div>
+							<div class="col-md-6 agileits-banner-info">
+								<h3>物美价廉</h3>
+								<h3>农产品</h3>
+								 <p>农产品之家</p>
+								<div class="more">
+									<a href="#" class="hvr-shutter-in-vertical" data-toggle="modal" data-target="#myModal">Read More <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+								</div>
+							</div>	
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="w3layouts-banner-top w3layouts-banner-top2">
+						<div class="container">
+							<div class="col-md-6 bannerimg2">
+							</div>
+							<div class="col-md-6 agileits-banner-info">
+								<h3>种类繁多</h3>
+								<h3>农产品</h3>
+								 <p>农产品之家</p>
+								<div class="more">
+									<a href="#" class="hvr-shutter-in-vertical" data-toggle="modal" data-target="#myModal">Read More <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+								</div>
+							</div>	
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="w3layouts-banner-top w3layouts-banner-top3">
+						<div class="container">
+							<div class="col-md-6 bannerimg3">
+							</div>
+							<div class="col-md-6 agileits-banner-info">
+								<h3>我们种植销售有机</h3>
+								<h3>农产品</h3>
+								 <p>农产品之家</p>
+								<div class="more">
+									<a href="#" class="hvr-shutter-in-vertical" data-toggle="modal" data-target="#myModal">Read More <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+								</div>
+							</div>	
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</li>
+
+			</ul>
+		</div>
+    </div>
+<!-- //banner slider -->
+
+<!--/about-->
+<div class="about" id="about">
+	<div class="container">
+		<h2 class="heading">关于我们的生产基地</h2>
+		<div class="col-md-7 aboutleft">
+			<h3>我们提供季节性和非季节性的优质水果。</h3>
+			<h3>我们种植最好的有机农产品</h3>
+			<p>1111 </p>
+			<div class="more">
+				<a href="#" class="hvr-shutter-in-vertical" data-toggle="modal" data-target="#myModal">Read More <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+			</div>
+		</div>
+		<div class="col-md-5 aboutright">
+			<div class="sreen-gallery-cursual">
+				<div id="owl-demo" class="owl-carousel">
+					<div class="item-owl">
+					    <div class="test-review">
+							<div class="img-agile">
+								<img src="static/images/apple.png" class="img-responsive" alt=""/>
+							</div>
+					    </div>
+					</div>
+					<div class="item-owl">
+					    <div class="test-review">
+							<div class="img-agile">
+								<img src="static/images/banana.png" class="img-responsive" alt=""/>
+							</div>
+						</div>
+					</div>
+					<div class="item-owl">
+					    <div class="test-review">
+							<div class="img-agile">
+								<img src="static/images/lemon.png" class="img-responsive" alt=""/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</div>
+<!--//about-->
+
+<!-- services section -->
+<section class="service-w3ls" id="services">
+	<div class="container">
+		<h3 class="heading">我们的服务</h3>
+		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 serv-w3layouts">
+			<div class="ch-grid slideanim">
+				<div>
+					<div class="ch-item ch-img-1">
+						<div class="ch-info">
+							<h3>我们新鲜的农产品</h3>
+						</div>
+					</div>
+				</div>
+			</div>
+			<h4 class="slideanim">100%纯天然农产品</h4>
+		</div>
+		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 serv-w3layouts">
+			<div class="ch-grid slideanim">
+				<div>
+					<div class="ch-item ch-img-2">
+						<div class="ch-info">
+							<h3>物美价廉</h3>
+						</div>
+					</div>
+				</div>
+			</div>
+			<h4 class="slideanim">我们种植高质量农产品</h4>
+		</div>
+		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 serv-w3layouts">
+			<div class="ch-grid slideanim">
+				<div>
+					<div class="ch-item ch-img-3">
+						<div class="ch-info">
+							<h3>季节农产品</h3>
+						</div>
+					</div>
+				</div>
+			</div>
+			<h4 class="slideanim">物美价廉</h4>
+		</div>
+		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 serv-w3layouts">
+			<div class="ch-grid slideanim">
+				<div>
+					<div class="ch-item ch-img-4">
+						<div class="ch-info">
+							<h3>非季节性农产品</h3>
+						</div>
+					</div>
+				</div>
+			</div>
+			<h4 class="slideanim">我们有经验丰富的农民</h4>
+		</div>
+		<div class="clearfix"></div>
+		
+		<div class="service-bottomgrids">
+			<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 serv-w3layouts">
+				<div class="ch-grid slideanim">
+					<div>
+						<div class="ch-item ch-img-5">
+							<div class="ch-info">
+								<h3>种植和销售</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+				<h4 class="slideanim">我们亲自种植然后销售</h4>
+			</div>
+			<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 serv-w3layouts">
+				<div class="ch-grid slideanim">
+					<div>
+						<div class="ch-item ch-img-6">
+							<div class="ch-info">
+								<h3>种类丰富的农产品</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+				<h4 class="slideanim">我们从不使用化学物质</h4>
+			</div>
+			<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 serv-w3layouts">
+				<div class="ch-grid slideanim">
+					<div>
+						<div class="ch-item ch-img-7">
+							<div class="ch-info">
+								<h3>有机食品</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+				<h4 class="slideanim">中华老字号</h4>
+			</div>
+			<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 serv-w3layouts">
+				<div class="ch-grid slideanim">
+					<div>
+						<div class="ch-item ch-img-8">
+							<div class="ch-info">
+								<h3>各类农产品</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+				<h4 class="slideanim">我们提供各类有机农产品</h4>
+			</div>
+		<div class="clearfix"></div>
+		</div>
+	</div>
+</section>
+<!-- /services section -->
+
+<!--team-->
+<div class="team" id="team">
+	<div class="w3agile-spldishes">
+		<div class="container">
+		<h3 class="heading">我们的农民</h3>
+			<div class="spldishes-agileinfo">
+				<div class="spldishes-grids">
+						<div class="col-md-3 item g1">
+							<img src="static/images/t1.jpg" title="Our Farmers" alt=""/>
+							<div class="agile-dish-caption">
+								<ul class="top-links">
+									<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+									<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+									<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+									<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+								</ul>
+							</div>
+							<h4>大胖</h4>
+							<p>农民</p>
+						</div>
+						<div class="col-md-3 item g1">
+							<img src="static/images/t2.jpg" title="Our Farmers" alt=""/>
+							<div class="agile-dish-caption">
+								<ul class="top-links">
+									<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+									<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+									<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+									<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+								</ul>
+							</div>
+								<h4>二胖</h4>
+								<p>农民</p>
+						</div>
+						<div class="col-md-3 item g1">
+							<img src="static/images/t3.jpg" title="Our Farmers" alt=""/>
+							<div class="agile-dish-caption">
+								<ul class="top-links">
+									<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+									<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+									<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+									<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+								</ul>
+							</div>
+								<h4>三胖</h4>
+								<p>农民</p>
+						</div>
+						<div class="col-md-3 item g1">
+							<img src="static/images/t4.jpg" title="Our Farmers" alt=""/>
+							<div class="agile-dish-caption">
+								<ul class="top-links">
+									<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+									<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+									<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+									<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+								</ul>
+							</div>
+								<h4>四胖</h4>
+								<p>农民</p>
+						</div>
+					<div class="clearfix"> </div>
+				</div> 
+			</div>  
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+</div>
+<!--//team-->
+
+<!-- gallery -->	
+<div id="gallery" class="gallery">
+	<h3 class="heading">农产品展厅</h3>
+		<div class="w3ls_banner_bottom_grids">
+			<div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+				<ul id="myTab" class="nav nav-tabs" role="tablist">
+					<li role="presentation" class="active"><a href="#banana" id="banana-tab" role="tab" data-toggle="tab" aria-controls="banana" aria-expanded="true">香蕉</a></li>
+					<li role="presentation"><a href="#apple" role="tab" id="apple-tab" data-toggle="tab" aria-controls="apple">苹果</a></li>
+					<li role="presentation"><a href="#lemon" role="tab" id="lemon-tab" data-toggle="tab" aria-controls="lemon">柠檬</a></li>
+					<li role="presentation"><a href="#Strawberry" role="tab" id="Strawberry-tab" data-toggle="tab" aria-controls="Strawberry">草莓</a></li>
+				</ul>
+				<div id="myTabContent" class="tab-content">
+					<div role="tabpanel" class="tab-pane fade in active" id="banana" aria-labelledby="banana-tab">
+						<div class="col-md-3 w3layouts_gallery_grid">
+							<a title="Donec sapien massa, placerat ac sodales ac, feugiat quis est." href="static/images/g1.jpg">
+								<div class="w3layouts_team_grid">
+									<img src="static/images/g1.jpg" alt=" " class="img-responsive" />
+									<div class="w3layouts_team_grid_pos">
+										<div class="wthree_text">
+											<h4>Cavendish Bananas</h4>
+											<p>Best In Quality</p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="col-md-3 w3layouts_gallery_grid">
+							<a title="Donec sapien massa, placerat ac sodales ac, feugiat quis est." href="static/images/g2.jpg">
+								<div class="w3layouts_team_grid">
+									<img src="static/images/g2.jpg" alt=" " class="img-responsive" />
+									<div class="w3layouts_team_grid_pos">
+										<div class="wthree_text">
+											<h4>女手指香蕉</h4>
+											<p>最好的质量</p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="col-md-3 w3layouts_gallery_grid">
+							<a title="Donec sapien massa, placerat ac sodales ac, feugiat quis est." href="static/images/g3.jpg">
+								<div class="w3layouts_team_grid">
+									<img src="static/images/g3.jpg" alt=" " class="img-responsive" />
+									<div class="w3layouts_team_grid_pos">
+										<div class="wthree_text">
+											<h4>食用香蕉</h4>
+											<p>最好的质量</p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="col-md-3 w3layouts_gallery_grid">
+							<a title="Donec sapien massa, placerat ac sodales ac, feugiat quis est." href="static/images/g4.jpg">
+								<div class="w3layouts_team_grid">
+									<img src="static/images/g4.jpg" alt=" " class="img-responsive" />
+									<div class="w3layouts_team_grid_pos">
+										<div class="wthree_text">
+											<h4>黄香蕉</h4>
+											<p>最好的质量</p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="col-md-3 w3layouts_gallery_grid">
+							<a title="Donec sapien massa, placerat ac sodales ac, feugiat quis est." href="static/images/g5.jpg">
+								<div class="w3layouts_team_grid">
+									<img src="static/images/g5.jpg" alt=" " class="img-responsive" />
+									<div class="w3layouts_team_grid_pos">
+										<div class="wthree_text">
+											<h4>香蕉</h4>
+											<p>最好的质量</p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="col-md-3 w3layouts_gallery_grid">
+							<a title="Donec sapien massa, placerat ac sodales ac, feugiat quis est." href="static/images/g6.jpg">
+								<div class="w3layouts_team_grid">
+									<img src="static/images/g6.jpg" alt=" " class="img-responsive" />
+									<div class="w3layouts_team_grid_pos">
+										<div class="wthree_text">
+											<h4>绿香蕉</h4>
+											<p>最好的质量</p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="col-md-3 w3layouts_gallery_grid">
+							<a title="Donec sapien massa, placerat ac sodales ac, feugiat quis est." href="static/images/g7.jpg">
+								<div class="w3layouts_team_grid">
+									<img src="static/images/g7.jpg" alt=" " class="img-responsive" />
+									<div class="w3layouts_team_grid_pos">
+										<div class="wthree_text">
+											<h4>香蕉花</h4>
+											<p>最好的质量</p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="col-md-3 w3layouts_gallery_grid">
+							<a title="Donec sapien massa, placerat ac sodales ac, feugiat quis est." href="static/images/g8.jpg">
+								<div class="w3layouts_team_grid">
+									<img src="static/images/g8.jpg" alt=" " class="img-responsive" />
+									<div class="w3layouts_team_grid_pos">
+										<div class="wthree_text">
+											<h4>黑点香蕉</h4>
+											<p>最好的质量</p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					<div role="tabpanel" class="tab-pane fade" id="apple" aria-labelledby="apple-tab">
+						<div class="col-md-3 w3layouts_gallery_grid">
+							<a title="Donec sapien massa, placerat ac sodales ac, feugiat quis est." href="static/images/g9.jpg">
+								<div class="w3layouts_team_grid">
+									<img src="static/images/g9.jpg" alt=" " class="img-responsive">
+									<div class="w3layouts_team_grid_pos">
+										<div class="wthree_text">
+											<h4>Fugi Apple</h4>
+											<p>Best In Quality</p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="col-md-3 w3layouts_gallery_grid">
+							<a title="Donec sapien massa, placerat ac sodales ac, feugiat quis est." href="static/images/g10.jpg">
+								<div class="w3layouts_team_grid">
+									<img src="static/images/g10.jpg" alt=" " class="img-responsive">
+									<div class="w3layouts_team_grid_pos">
+										<div class="wthree_text">
+											<h4>Green Apple</h4>
+											<p>Best In Quality</p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="col-md-3 w3layouts_gallery_grid">
+							<a title="Donec sapien massa, placerat ac sodales ac, feugiat quis est." href="static/images/g11.jpg">
+								<div class="w3layouts_team_grid">
+									<img src="static/images/g11.jpg" alt=" " class="img-responsive">
+									<div class="w3layouts_team_grid_pos">
+										<div class="wthree_text">
+											<h4>Gala Apple</h4>
+											<p>Best In Quality</p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="col-md-3 w3layouts_gallery_grid">
+							<a title="Donec sapien massa, placerat ac sodales ac, feugiat quis est." href="static/images/g12.jpg">
+								<div class="w3layouts_team_grid">
+									<img src="static/images/g12.jpg" alt=" " class="img-responsive">
+									<div class="w3layouts_team_grid_pos">
+										<div class="wthree_text">
+											<h4>Bonza Apple</h4>
+											<p>Best In Quality</p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="col-md-3 w3layouts_gallery_grid">
+							<a title="Donec sapien massa, placerat ac sodales ac, feugiat quis est." href="static/images/g13.jpg">
+								<div class="w3layouts_team_grid">
+									<img src="static/images/g13.jpg" alt=" " class="img-responsive">
+									<div class="w3layouts_team_grid_pos">
+										<div class="wthree_text">
+											<h4>Red Delicious Apple</h4>
+											<p>Best In Quality</p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						
+						<div class="col-md-3 w3layouts_gallery_grid">
+							<a title="Donec sapien massa, placerat ac sodales ac, feugiat quis est." href="static/images/g14.jpg">
+								<div class="w3layouts_team_grid">
+									<img src="static/images/g14.jpg" alt=" " class="img-responsive">
+									<div class="w3layouts_team_grid_pos">
+										<div class="wthree_text">
+											<h4>Golden Delicious Apple</h4>
+											<p>Best In Quality</p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					<div role="tabpanel" class="tab-pane fade" id="lemon" aria-labelledby="lemon-tab">
+						<div class="col-md-3 w3layouts_gallery_grid">
+							<a title="Donec sapien massa, placerat ac sodales ac, feugiat quis est." href="static/images/g15.jpg">
+								<div class="w3layouts_team_grid">
+									<img src="static/images/g15.jpg" alt=" " class="img-responsive">
+									<div class="w3layouts_team_grid_pos">
+										<div class="wthree_text">
+											<h4>Yellow Lemon</h4>
+											<p>Best In Quality</p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="col-md-3 w3layouts_gallery_grid">
+							<a title="Donec sapien massa, placerat ac sodales ac, feugiat quis est." href="static/images/g16.jpg">
+								<div class="w3layouts_team_grid">
+									<img src="static/images/g16.jpg" alt=" " class="img-responsive">
+									<div class="w3layouts_team_grid_pos">
+										<div class="wthree_text">
+											<h4>Green Lemon</h4>
+											<p>Best In Quality</p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="col-md-3 w3layouts_gallery_grid">
+							<a title="Donec sapien massa, placerat ac sodales ac, feugiat quis est." href="static/images/g17.jpg">
+								<div class="w3layouts_team_grid">
+									<img src="static/images/g17.jpg" alt=" " class="img-responsive">
+									<div class="w3layouts_team_grid_pos">
+										<div class="wthree_text">
+											<h4>Kumquat</h4>
+											<p>Best In Quality</p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="col-md-3 w3layouts_gallery_grid">
+							<a title="Donec sapien massa, placerat ac sodales ac, feugiat quis est." href="static/images/g18.jpg">
+								<div class="w3layouts_team_grid">
+									<img src="static/images/g18.jpg" alt=" " class="img-responsive">
+									<div class="w3layouts_team_grid_pos">
+										<div class="wthree_text">
+											<h4>Key Lime</h4>
+											<p>Best In Quality</p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="col-md-3 w3layouts_gallery_grid">
+							<a title="Donec sapien massa, placerat ac sodales ac, feugiat quis est." href="static/images/g19.jpg">
+								<div class="w3layouts_team_grid">
+									<img src="static/images/g19.jpg" alt=" " class="img-responsive">
+									<div class="w3layouts_team_grid_pos">
+										<div class="wthree_text">
+											<h4>Key Lime</h4>
+											<p>Best In Quality</p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="col-md-3 w3layouts_gallery_grid">
+							<a title="Donec sapien massa, placerat ac sodales ac, feugiat quis est." href="static/images/g20.jpg">
+								<div class="w3layouts_team_grid">
+									<img src="static/images/g20.jpg" alt=" " class="img-responsive">
+									<div class="w3layouts_team_grid_pos">
+										<div class="wthree_text">
+											<h4>Lemon</h4>
+											<p>Best In Quality</p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					<div role="tabpanel" class="tab-pane fade" id="Strawberry" aria-labelledby="Strawberry-tab">
+						<div class="col-md-3 w3layouts_gallery_grid">
+							<a title="Donec sapien massa, placerat ac sodales ac, feugiat quis est." href="static/images/g21.jpg">
+								<div class="w3layouts_team_grid">
+									<img src="static/images/g21.jpg" alt=" " class="img-responsive">
+									<div class="w3layouts_team_grid_pos">
+										<div class="wthree_text">
+											<h4>Strasberry</h4>
+											<p>Best In Quality</p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="col-md-3 w3layouts_gallery_grid">
+							<a title="Donec sapien massa, placerat ac sodales ac, feugiat quis est." href="static/images/g22.jpg">
+								<div class="w3layouts_team_grid">
+									<img src="static/images/g22.jpg" alt=" " class="img-responsive">
+									<div class="w3layouts_team_grid_pos">
+										<div class="wthree_text">
+											<h4>Fragaria</h4>
+											<p>Best In Quality</p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="col-md-3 w3layouts_gallery_grid">
+							<a title="Donec sapien massa, placerat ac sodales ac, feugiat quis est." href="static/images/g23.jpg">
+								<div class="w3layouts_team_grid">
+									<img src="static/images/g23.jpg" alt=" " class="img-responsive">
+									<div class="w3layouts_team_grid_pos">
+										<div class="wthree_text">
+											<h4>Garden Strawberry</h4>
+											<p>Best In Quality</p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="col-md-3 w3layouts_gallery_grid">
+							<a title="Donec sapien massa, placerat ac sodales ac, feugiat quis est." href="static/images/g24.jpg">
+								<div class="w3layouts_team_grid">
+									<img src="static/images/g24.jpg" alt=" " class="img-responsive">
+									<div class="w3layouts_team_grid_pos">
+										<div class="wthree_text">
+											<h4>Wild strawberries</h4>
+											<p>Best In Quality</p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="col-md-3 w3layouts_gallery_grid">
+							<a title="Donec sapien massa, placerat ac sodales ac, feugiat quis est." href="static/images/g25.jpg">
+								<div class="w3layouts_team_grid">
+									<img src="static/images/g25.jpg" alt=" " class="img-responsive">
+									<div class="w3layouts_team_grid_pos">
+										<div class="wthree_text">
+											<h4>Musk strawberry</h4>
+											<p>Best In Quality</p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="col-md-3 w3layouts_gallery_grid">
+							<a title="Donec sapien massa, placerat ac sodales ac, feugiat quis est." href="static/images/g26.jpg">
+								<div class="w3layouts_team_grid">
+									<img src="static/images/g26.jpg" alt=" " class="img-responsive">
+									<div class="w3layouts_team_grid_pos">
+										<div class="wthree_text">
+											<h4>Virginia strawberry</h4>
+											<p>最好的质量</p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- //gallery -->
+
+<!-- clients-->
+	<div class="clients" id="clients">
+		<div class="container">
+			<h3 class="heading">我们的顾客</h3>
+			<div class="wmuSlider example1 animated wow slideInUp" data-wow-delay=".5s">
+					<div class="wmuSliderWrapper">
+						<article style="position: absolute; width: 100%; opacity: 0;"> 
+							<div class="banner-wrap">
+								<div class="col-md-6 client-grids">
+									<p>味道好极了</p>
+									<div class="col-md-3 c-img">
+										<img src="static/images/c1.jpg"  alt="" />
+									</div>
+									<div class="col-md-3 c-info">
+										<h4>小明</h4>
+										<h5>顾客</h5>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="col-md-6 client-grids">
+									<p>味道好极了</p>
+									<div class="col-md-3 c-img">
+										<img src="static/images/c2.jpg"  alt="" />
+									</div>
+									<div class="col-md-3 c-info">
+										<h4>小红</h4>
+										<h5>顾客</h5>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+						</article>
+						<article style="position: absolute; width: 100%; opacity: 0;"> 
+							<div class="banner-wrap">
+								<div class="col-md-6 client-grids">
+									<p>味道好极了</p>
+									<div class="col-md-3 c-img">
+										<img src="static/images/c3.jpg"  alt="" />
+									</div>
+									<div class="col-md-3 c-info">
+										<h4>Elizabeth</h4>
+										<h5>Customer3</h5>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="col-md-6 client-grids">
+									<p>味道好极了</p>
+									<div class="col-md-3 c-img">
+										<img src="static/images/c4.jpg"  alt="" />
+									</div>
+									<div class="col-md-3 c-info">
+										<h4>王大爷</h4>
+										<h5>顾客</h5>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+									<div class="clearfix"></div>
+							</div>
+						</article>
+					</div>
+				</div>
+		</div>
+	</div>
+<!--//clients-->
+
+<!-- subscribe -->
+<div class="subscribe">
+	<div class="container">
+		<h3 class="heading">订阅我们</h3>
+		<div class="subscribe-grid">
+			<form action="#" method="post">
+				<input type="email" placeholder="Enter Your Email" name="email" required="">
+				<button class="btn1"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- //subscribe -->
+
+<!-- contact -->
+<div class="contact" id="contact">
+	<div class="container">
+		<div class="col-md-6 contactleft">
+			<h3 class="heading">联系我们</h3>
+			<h4>农产品管理系统</h4>
+			<i class="fa fa-map-marker" aria-hidden="true"></i>
+			<p>辽宁省沈阳市皇姑区沈阳师范大学</p>
+			<i class="fa fa-phone" aria-hidden="true"></i>
+			<p>电话:1584024****</p>
+            <p>QQ:976204***</p>
+			<p>联系人:郭先生</p>
+			<i class="fa fa-envelope" aria-hidden="true"></i>
+			<p><a href="mailto:info@example.com">976204***@qq.com</a></p>
+			<div class="contactform">
+				<h4>联系我们</h4>
+				<form action="#" method="post">
+					<div class="col-md-6 agileits_agile_about_mail_left">
+						<input type="text" name="Name" placeholder="Name" required="">
+					<div class="clearfix"> </div>
+					</div>
+					<div class="col-md-6 agileits_agile_about_mail_left">
+						<input type="email" name="Email" placeholder="Email" required="">
+					<div class="clearfix"> </div>
+					</div>
+					<div class="clearfix"> </div>
+					<textarea name="Message" placeholder="Message..." required></textarea>
+					<div class="submit">
+						<input type="submit" value="Submit">
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="col-md-6 contactright">
+			<iframe src=""></iframe>
+		</div>
+		<div class="clearfix"> </div>
+	</div>
+</div>
+<!-- //contact -->
+
+<!-- footer -->
+<div class="footer">
+	<div class="container">
+		<div class="col-md-6 footernav">
+			<div class="agileits-social">
+			<ul>
+				<li><a href="#home" class="scroll">主页</a></li>
+				<li><a href="#about" class="scroll">关于</a></li>
+				<li><a href="#services" class="scroll">服务</a></li>
+				<li><a href="#team" class="scroll">农民</a></li>
+				<li><a href="#clients" class="scroll">客户</a></li>
+				<li><a href="#gallery" class="scroll">画廊</a></li>
+			</ul>
+		</div>
+		</div>
+	</div>
+</div>
+<!-- //footer -->
+
+<!-- bootstrap-pop-up -->
+	<div class="modal video-modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3>Fruit land</h3>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
+				</div>
+				<div>
+					<div class="modal-body">
+						<img src="static/images/banana.png" alt=" " class="img-responsive" />
+						<p>11111111
+							<i>1111111</i></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- //bootstrap-pop-up -->
+
+<!-- Default-JavaScript-File -->
+	<script type="text/javascript" src="static/js/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="static/js/bootstrap.js"></script>
+<!-- //Default-JavaScript-File -->
+
+<!-- Banner Slider js script file-->
+<script src="static/js/JiSlider.js"></script>
+<script>
+			$(window).load(function () {
+				$('#JiSlider').JiSlider({color: '#fff', start: 3, reverse: false}).addClass('ff')
+			})
+		</script>
+<!-- //Banner Slider js script file-->
+
+<!-- required-js-files-->
+<link href="static/css/owl.carousel.css" rel="stylesheet">
+	<script src="static/js/owl.carousel.js"></script>
+		<script>
+			$(document).ready(function() {
+				$("#owl-demo").owlCarousel({
+					items : 1,
+					lazyLoad : true,
+					autoPlay : true,
+					navigation : false,
+					navigationText :  false,
+					pagination : true,
+				});
+			});
+		 </script>
+<!--//required-js-files-->
+
+<!-- Light box js-file-->
+	<script src="static/js/simpleLightbox.js"></script>
+	<script>
+		$('.w3layouts_gallery_grid a').simpleLightbox();
+	</script>
+<!-- //Light box js-file-->
+
+<!-- clients js file-->
+<script src="static/js/jquery.wmuSlider.js"></script>
+	<script>
+		$('.example1').wmuSlider();         
+	</script> 
+<!-- //clients js file -->
+
+<!-- scrolling script -->
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event){
+		   if( $(".scroll:gt(6)")) return;
+			event.preventDefault();
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+		});
+	});
+</script> 
+<!-- //scrolling script -->
+
+<!-- Stars scrolling script -->
+	<script src="static/js/SmoothScroll.min.js"></script>
+	<script type="text/javascript" src="static/js/move-top.js"></script>
+	<script type="text/javascript" src="static/js/easing.js"></script>
+	<!-- here stars scrolling icon -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/*
+				var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear' 
+				};
+			*/
+								
+			$().UItoTop({ easingType: 'easeOutQuart' });
+								
+			});
+	</script>
+<!-- //here ends scrolling icon -->
+<!-- //Ends scrolling script -->
+
+</body>
+<!-- //Body -->
+</html>
